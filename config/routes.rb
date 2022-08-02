@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root :to => 'home#index'
+
+  constraints(ClientDomainConstraint.new) do
+    devise_for :users, controllers: { sessions: 'users/sessions' }
+  end
+
+  constraints(AdminDomainConstraint.new) do
+    namespace :admin, path: '' do
+      devise_for :users, controllers: { sessions: 'admins/sessions' }
+    end
+  end
 end
