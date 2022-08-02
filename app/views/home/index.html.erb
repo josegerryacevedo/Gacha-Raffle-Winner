@@ -1,0 +1,9 @@
+<h1>Hi!</h1>
+
+
+
+<%if current_user%>
+  <h3><%= link_to "LOGOUT", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></h3>
+<% else %>
+  <h3><%= link_to 'LOGIN', new_user_session_path %></h3>
+<% end %>
