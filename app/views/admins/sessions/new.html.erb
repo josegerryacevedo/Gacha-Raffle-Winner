@@ -1,17 +1,33 @@
-<h2>Log in</h2>
+<section class="vh-100" style="background-color: #ffff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 2rem;">
+          <div class="card-body p-5 text-center">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <h2>Admin Login</h2>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+                <div class="field">
+                  <%= f.label :password %><br />
+                  <%= f.password_field :password, autocomplete: "current-password" %>
+                </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+                <div class="actions">
+                  <%= f.submit "Log in" %>
+                </div>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
   </div>
-<% end %>
+</section>
+
+
+

@@ -1,0 +1,65 @@
+
+<nav class="navbar navbar-expand-lg bg-dark px-lg-5">
+  <div class="container-fluid">
+    <a class="navbar-brand text-info" href="#">Admin</a>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="d-none d-sm-inline mx-1">Username</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><%= link_to "Profile", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" }, class: 'dropdown-item' %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" }, class: 'dropdown-item' %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row flex-nowrap ">
+    <div class="col-auto col-md-2.5 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-5 pt-2 text-white min-vh-100">
+        <ul class="nav nav-pills flex-column mb-sm-auto align-items-center align-items-sm-start" id="menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link align-middle px-0 text-light">
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home Page</span>
+            </a>
+            <hr>
+          </li>
+
+          <li>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"></span>Management</a>
+            <ul class="collapse nav flex-column ms-1 border-light" id="submenu1" data-bs-parent="#menu">
+              <li class="w-100">
+                <a href="#" class="nav-link bg-light px-5"> <span class="d-none d-sm-inline">Item</span> 1</a>
+              </li>
+              <br>
+              <li>
+                <a href="#" class="nav-link bg-light px-5"> <span class="d-none d-sm-inline">Item</span> 2</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"></span>System Management</a>
+            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+              <li class="w-100">
+                <a href="#" class="nav-link bg-light px-5"> <span class="d-none d-sm-inline"></span>Item</a>
+              </li>
+              <br>
+              <li>
+                <a href="#" class="nav-link bg-light px-5"> <span class="d-none d-sm-inline"></span>Item</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+        <hr>
+      </div>
+    </div>
+    <div class="col py-3">
+      Admin
+    </div>
+  </div>
+</div>

@@ -1,26 +1,99 @@
-<h2>Log in</h2>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <%= link_to 'Logo', client_root_path, class: 'navbar-brand' %>
+          <ul class="nav">
+            <li class="nav-item">
+               <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link " %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Language</a>
+            </li>
+            <li class="nav-item">
+              <button class="navbar-toggler" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </li>
+          </ul>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Info</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Facebook</a>
+          </li>
+        </ul>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+   </div>
   </div>
-<% end %>
+</nav>
 
-<%= render "users/shared/links" %>
+<section class="vh-100" style="background-color: #ffff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 2rem;">
+          <div class="card-body p-5 text-center">
+              <!-- Pills navs -->
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <%= link_to "Log in", new_session_path(resource_name), class: "nav-link active" %>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+                </li>
+              </ul>
+
+              <!-- Pills navs -->
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="mb-4">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+
+                <div class="mb-4">
+                  <%= f.label :password %><br />
+                  <%= f.password_field :password, autocomplete: "current-password" %>
+                </div>
+
+                <% if devise_mapping.rememberable? %>
+                  <div class="mb-4">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                <% end %>
+                <%= f.submit class:"btn btn-primary" %>
+            <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ul class="nav bg-light justify-content-center fixed-bottom ">
+  <li class="nav-item">
+    <a class="nav-link" href="#">Share</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Invite</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Lottery</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Shop</a>
+  </li>
+</ul>
+
