@@ -33,6 +33,8 @@
 /config/master.key
 
 /public/packs
+/public/uploads/tmp
+/public/uploads/user
 /public/packs-test
 /node_modules
 /yarn-error.log
