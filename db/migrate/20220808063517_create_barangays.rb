@@ -3,7 +3,7 @@ class CreateBarangays < ActiveRecord::Migration[6.1]
     create_table :barangays do |t|
       t.string :code
       t.string :name
-      t.belongs_to :city_municipality
+      t.belongs_to :city
       t.timestamps
     end
   end

@@ -1,3 +1,3 @@
 class Barangay < ApplicationRecord
-  belongs_to :city_municipality
+  belongs_to :city
 end
