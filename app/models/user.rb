@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  validates :phone, phone: true
+  validates :phone, phone: {allow_blank: true}
+
   mount_uploader :image, ImageUploader
 
   def client?
