@@ -21,12 +21,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    if params[:user][:current_password].present?
+    form = params[:user]
+    if form[:current_password].present? || form[:password].present? || form[:password_confirmation].present?
       update_with_password
     else
       update_user
     end
-    redirect_to client_root_path
   end
 
   # DELETE /resource
@@ -78,17 +78,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_with_password(password_params)
       flash[:notice] = "Successfully updated"
       sign_in @user, :bypass => true
+      redirect_to users_profile_path
     else
-      flash[:alert] = "Error"
+      render :edit
     end
+
   end
 
   def update_user
     if @user.update(user_params)
       flash[:notice] = "Successfully updated"
       sign_in @user, :bypass => true
+      redirect_to users_profile_path
     else
-      flash[:alert] = "Error"
+      render :edit
     end
   end
 end
