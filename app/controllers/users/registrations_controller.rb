@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       update_user
     end
-    redirect_to edit_user_registration_path
+    redirect_to client_root_path
   end
 
   # DELETE /resource
