@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     root to:  'users/home#index', as: :client_root
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     namespace :users do
+      get 'invite-people', to: 'invite_people#invite_qr'
       resource :profile
       resources :addresses
     end
