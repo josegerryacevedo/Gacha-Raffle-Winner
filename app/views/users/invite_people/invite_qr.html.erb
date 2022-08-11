@@ -75,9 +75,13 @@
         <%= @svg.html_safe %>
       </div>
       <br>
+      <% if current_user %>
       <div class="text-center text-uppercase">
         <%= link_to @url, @url, class: "btn text-dark bg-info border border-none"%>
       </div>
+      <% else %>
+        <%= link_to "http://client.com:3000/users/sign_up", new_user_registration_path, class: 'btn btn-outline-info'%>
+      <% end %>
     </div>
   </div>
 </div>

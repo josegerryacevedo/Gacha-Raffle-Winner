@@ -4,7 +4,7 @@ class Users::InvitePeopleController < ApplicationController
   before_action :generate_qrcode
 
   def url
-    @url="#{request.base_url}/users/sign_up?promoter=#{current_user.email}"
+    @url="#{request.base_url}/users/sign_up?promoter=#{current_user&.email}"
   end
 
   def generate_qrcode
