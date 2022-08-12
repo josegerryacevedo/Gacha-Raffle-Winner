@@ -1,0 +1,43 @@
+<!--sidebar-->
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-2.5 col-xl-2 px-sm-2 px-0" style="background-color: #000033">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-5 pt-2 text-white min-vh-100" style="font-family: Sathu">
+        <ul class="nav nav-pills flex-column mb-sm-auto align-items-center align-items-sm-start" id="menu">
+          <li class="nav-item">
+            <%= link_to 'Dashboard', admins_admin_root_path, class: 'nav-link text-light' %>
+            <hr>
+          </li>
+          <li>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"></span>Management</a>
+            <ul class="collapse nav flex-column ms-1 border-light" id="submenu1" data-bs-parent="#menu">
+              <li class="w-100">
+                <%= link_to "User List", admins_users_path, class: 'nav-link px-5 text-info' %>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-5 text-info"> <span class="d-none d-sm-inline"></span> Item List</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"></span>System Management</a>
+            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+              <li class="w-100">
+                <a href="#" class="nav-link px-5 text-info"> <span class="d-none d-sm-inline"></span>Example 1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-5 text-info"> <span class="d-none d-sm-inline"></span>Example 2</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+        <hr>
+      </div>
+    </div>
+    <%= yield %>
+  </div>
+</div>

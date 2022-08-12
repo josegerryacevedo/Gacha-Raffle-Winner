@@ -11,8 +11,9 @@ Rails.application.routes.draw do
 
   constraints(AdminDomainConstraint.new) do
     namespace :admins , path: '' do
-      root to: 'home#index'
+      root to: 'home#index', as: :admin_root
       devise_for :users, controllers: { sessions: 'admins/sessions' }
+      resources :users
     end
   end
 end

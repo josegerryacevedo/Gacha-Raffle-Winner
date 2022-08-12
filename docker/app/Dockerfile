@@ -1,11 +1,11 @@
 FROM ruby:2.6.8
 RUN bundle config --global frozen 0
 
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.users.d/yarn.users
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
-RUN apt-get update && apt-get install -y nodejs mariadb-client sqlite3 cron yarn --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nodejs mariadb-client sqlite3 cron yarn --no-install-recommends && rm -rf /var/lib/apt/users/*
 
 ENV APP_PATH /usr/src/app
 RUN mkdir -p $APP_PATH
