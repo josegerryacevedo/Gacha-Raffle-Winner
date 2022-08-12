@@ -1,73 +1,8 @@
-<!--header-->
-<nav class="navbar navbar-light bg-light fixed-top">
-  <div class="container-fluid">
-    <%= link_to 'Logo', client_root_path, class: 'navbar-brand' %>
-    <ul class="nav">
-      <li class="nav-item">
-        <%= link_to "Log in", new_user_session_path, class: 'nav-link' unless user_signed_in? %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Sign up", new_user_registration_path, class: 'nav-link' unless user_signed_in? %>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Language</a>
-      </li>
-      <li class="nav-item">
-        <button class="navbar-toggler" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </li>
-    </ul>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Info</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body text-decoration-none">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
-          <% if current_user %>
-            <li class="nav-item">
-              Username:
-            </li>
-            <li class="nav-item">
-              Email: <%= current_user.email %>
-            </li>
-            <li class="nav-item">
-              Coins:
-            </li>
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="button">CASH IN NOW</button>
-            </div>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to "My Profile", users_profile_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" }, class: 'nav-link' %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact Us</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">Facebook</a>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-
 <!--Page-->
-<div class="container" style="margin-top: 100px">
-  <div class="card text-center border border-info bg-transparent" style="background-image: url('/sd.png'); background-size: initial; border-radius: 20px" >
-    <div class="card-header bg-transparent text-info border border-info" style="border-top-left-radius: 20px; border-top-right-radius: 20px">
+<div class="container justify-content-center" style="margin-top: 100px">
+
+  <div class="card text-center bg-transparent" style="background-image: url('/141e60d5c88c9c2809dc2d0b0f82d3fb.jpeg'); background-size: 100%; border-radius: 20px" >
+    <div class="card-header bg-transparent text-light" style="border-top-left-radius: 21px; border-top-right-radius: 21px">
       QR CODE
     </div>
     <div class="card-body">
@@ -75,32 +10,24 @@
         <%= @svg.html_safe %>
       </div>
       <br>
-      <% if current_user %>
-      <div class="text-center text-uppercase">
-        <%= link_to @url, @url, class: "btn text-dark bg-info border border-none"%>
+      <div class="text-center">
+        <div id="link" class="text-light" style="font-style: oblique">
+          <%= @url %>
+        </div>
+        <button onclick="copy_url()" type="button" class="btn btn-outline-light">Copy Link</button>
       </div>
-      <% else %>
-        <%= link_to "http://client.com:3000/users/sign_up", new_user_registration_path, class: 'btn btn-outline-info'%>
-      <% end %>
     </div>
   </div>
 </div>
 
-<!--footer-->
-<ul class="nav bg-light justify-content-center fixed-bottom ">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Share</a>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Invite", users_invite_people_path, class: 'nav-link'%>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Lottery</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Shop</a>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Me", users_profile_path, class: 'nav-link' %>
-  </li>
-</ul>
+<script>
+  function copy_url() {
+      const range = document.createRange();
+      range.selectNode(document.getElementById("link"));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+  }
+</script>
+<%= render "layouts/nav" %>
