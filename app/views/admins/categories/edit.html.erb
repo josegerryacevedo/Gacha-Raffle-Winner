@@ -1,0 +1,16 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Edit List</h1>
+  </div>
+  <br>
+  <div class="container">
+    <%= form_for @category, url: admins_category_path(@category), method: :patch do |f| %>
+      <div class="field">
+        <%= f.label :name, 'Name Of Category:' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+        <%= f.submit "Update", class: 'border btn btn-primary' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_categories_path, class: 'btn btn-primary' %>
+</div>

@@ -13,8 +13,7 @@ Rails.application.routes.draw do
     namespace :admins , path: '' do
       root to: 'home#index', as: :admin_root
       devise_for :users, controllers: { sessions: 'admins/sessions' }
-      resources :users
-      resources :items
+      resources :users, :items, :categories
     end
   end
 end

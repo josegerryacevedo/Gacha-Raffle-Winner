@@ -1,0 +1,17 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Create Category</h1>
+  </div>
+  <br>
+  <div class="container">
+    <%= render "users/shared/error_messages", resource: @category %>
+    <%= form_for @category, url: admins_categories_path(@category), method: :post do |f| %>
+      <div class="field">
+        <%= f.label :name, 'Name Of Category:' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+        <%= f.submit "Create", class: 'border btn btn-primary' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_categories_path, class: 'btn btn-primary' %>
+</div>
