@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_10_065422) do
+ActiveRecord::Schema.define(version: 2022_08_12_064746) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "genre"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 2022_08_10_065422) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_cities_on_province_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "image"
+    t.string "name"
+    t.integer "quantity"
+    t.integer "minimum_bets"
+    t.string "state"
+    t.integer "batch_count"
+    t.datetime "online_at"
+    t.datetime "offline_at"
+    t.datetime "start_at"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "provinces", force: :cascade do |t|

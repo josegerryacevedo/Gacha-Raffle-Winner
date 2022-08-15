@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       root to: 'home#index', as: :admin_root
       devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
+      resources :items
     end
   end
 end
