@@ -32,8 +32,8 @@
     </div>
 
     <div class="field">
-      <%= f.label :batch_count %>
-      <%= f.text_field :batch_count, class: 'form-control' %>
+      <%= f.label :category_id %>
+      <%= f.collection_select :category_id, Category.order(:name),:id,:name, {:prompt => 'Category choice'}, include_blank: true, class: 'form-control' %>
     </div>
 
     <div class="field">

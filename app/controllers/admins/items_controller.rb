@@ -36,7 +36,7 @@ class Admins::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit( :image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity)
+    params.require(:item).permit( :image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity, :category_id)
   end
 
   def set_item
