@@ -1,17 +1,11 @@
 class Item < ApplicationRecord
-  validates_presence_of :image
-  validates_presence_of :name
-  validates_presence_of :quantity
-  validates_presence_of :minimum_bets
-  validates_presence_of :state
-  validates_presence_of :online_at
-  validates_presence_of :offline_at
-  validates_presence_of :start_at
-  validates_presence_of :status
+  validates :image, :name, :quantity, :minimum_bets, :state, :online_at, :offline_at, :start_at, :status, presence: true
+
   belongs_to :category
+
   mount_uploader :image, ImageUploader
 
-  enum status: [:Inactive, :Active]
+  enum status: [:active, :inactive]
 
   default_scope { where(deleted_at: nil) }
 
@@ -24,8 +18,8 @@ class Item < ApplicationRecord
     state :pending, initial: true
     state :starting, :paused, :ended, :cancelled
 
-    event :start, after: :start do
-      transitions from: [:pending, :ended, :cancelled], to: :starting, guards: [:greaterthan_zero?, :future?, :active?]
+    event :start do
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity, guards: [:greater_than_zero?, :future?, :active?]
       transitions from: :paused, to: :starting
     end
 
@@ -37,26 +31,27 @@ class Item < ApplicationRecord
       transitions from: :starting, to: :ended
     end
 
-    event :cancel do
+    event :cancel, after: :add_quantity do
       transitions from: [:starting, :paused], to: :cancelled
     end
   end
 
-  def start
-    @quantity = self.quantity - 1
-    @batch_count = self.batch_count + 1
-    self.update(quantity: @quantity, batch_count: @batch_count)
+  def add_quantity
+    @add_quantity = self.quantity + 1
+    update(quantity: @add_quantity)
   end
 
-  def greaterthan_zero?
-    self.quantity > 0
+  def batch_quantity
+    @quantity = self.quantity - 1
+    @batch_count = self.batch_count + 1
+    update(quantity: @quantity, batch_count: @batch_count)
+  end
+
+  def greater_than_zero?
+    quantity > 0
   end
 
   def future?
     Time.now < offline_at
-  end
-
-  def active?
-    status == 'Active'
   end
 end
