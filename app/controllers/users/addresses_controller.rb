@@ -3,7 +3,7 @@ class Users::AddressesController  < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
-    @addresses = current_user.addresses.includes(:user)
+    @addresses = current_user.addresses.includes(:region, :province, :city, :barangay)
   end
 
   def new
@@ -24,7 +24,7 @@ class Users::AddressesController  < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to users_addresses_path
+      redirect_to users_addresses_path, notice: 'Successfully Updated'
     else
       render :edit
     end
@@ -32,11 +32,14 @@ class Users::AddressesController  < ApplicationController
 
   def destroy
     if @address.destroy
-      redirect_to users_addresses_path, notice: 'Post successfully deleted'
+      redirect_to users_addresses_path, notice: 'Successfully Deleted'
+    else
+      redirect_to users_addresses_path, alert: 'Default Address Cant Be Destroy!'
     end
   end
 
   private
+
   def address_params
     params.require(:address).permit( :genre, :is_default, :name, :street_address, :phone_number, :region_id, :province_id, :city_id, :barangay_id, :remark)
   end

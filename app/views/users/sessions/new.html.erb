@@ -6,38 +6,36 @@
           <div class="card-body p-5 text-center">
             <p class="alert"><%= alert %></p>
             <p class="notice"><%= notice %></p>
-              <!-- Pills navs -->
-              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <%= link_to "Log in", new_session_path(resource_name), class: "nav-link active" %>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
-                </li>
-              </ul>
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+              <li class="nav-item" role="presentation">
+                <%= link_to "Log in", new_session_path(resource_name), class: "nav-link active" %>
+              </li>
+              <li class="nav-item" role="presentation">
+                <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+              </li>
+            </ul>
 
-              <!-- Pills navs -->
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <div class="mb-4">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-                </div>
+            <!-- Pills navs -->
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="mb-4">
+                <%= f.label :email %><br/>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
 
-                <div class="mb-4">
-                  <%= f.label :password %><br />
-                  <%= f.password_field :password, autocomplete: "current-password" %>
-                </div>
+              <div class="mb-4">
+                <%= f.label :password %><br/>
+                <%= f.password_field :password, autocomplete: "current-password" %>
+              </div>
 
-                <%= f.submit class:"btn btn-primary" %>
+              <%= f.submit class: "btn btn-primary" %>
             <% end %>
-
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </section>
-
 <%= render "layouts/nav" %>
 

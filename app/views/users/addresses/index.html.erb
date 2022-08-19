@@ -1,38 +1,45 @@
 <!--Index Page-->
-<div class="container" style="height: 100vh">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<div class="container" style="height: 125vh">
   <!--action button-->
-  <div class="row">
+  <div class="row" style="padding-top: 70px">
     <div class="col">
-      <%= link_to "Back", users_profile_path, class: 'btn btn-primary form-control'%>
+      <%= link_to "Back", users_profile_path, class: 'btn form-control text-light', style: 'background-color: #000033' %>
     </div>
     <div class="col">
-      <%= link_to "Add Address", new_users_address_path, class: 'btn btn-primary form-control'%>
+      <%= link_to "Add new Address", new_users_address_path, class: 'btn form-control text-light', style: 'background-color: #000033' %>
     </div>
   </div>
   <br>
-  <% unless @addresses.present? %>
-      <h2>No address to show</h2>
-  <% end %>
+  <%= render 'layouts/errors_message' %>
+  <div class="card text-center border-0">
+    <% if @addresses.blank? %>
+    <div class="card-body">
+      <h2>No Address To Show</h2>
+    </div>
+    <% end %>
+  </div>
   <% @addresses.each do |address| %>
-    <div class="card" style="background-color: lightgray">
-      <div class="card-body" style="padding: 10px; background-color: lightcyan; margin: 10px">
-        <%= address.is_default == true ? 'Default' : ''%>
-        <%= address.genre %>
-        <div class="mb-2" >
-          <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Full Name: <%= address.name %></label>
+    <div class="card bg-light border-dark" style="font-family: 'Apple SD Gothic Neo'">
+      <div class="card-body">
+        <%= content_tag :div, 'Default', class: 'badge rounded-pill text-bg-dark text-light' if address.is_default %>
+        <%= content_tag :div, address.genre, class: 'badge rounded-pill text-bg-dark text-light' %>
+        <div class="mb-1">
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Full Name</span> <%= address.name %>
+          </label>
         </div>
-        <div class="mb-2">
-          <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Phone Number: <%= address.phone_number %></label>
+        <div class="mb-1">
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Phone Number</span> <%= address.phone_number %>
+          </label>
         </div>
-        <div class="mb-2">
-          <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">
-            Address: <%= address.street_address%> <%= address&.region.name%>, <%= address&.province.name%>, <%= address&.city.name%>, <%= address&.barangay.name%>  </label>
+        <div class="mb-1">
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm">
+            <span class="text-secondary">Address</span> <%= address.street_address %> <%= address&.region.name %>
+            , <%= address&.province.name %>, <%= address&.city.name %>, <%= address&.barangay.name %>  </label>
         </div>
-          <%= link_to 'Edit', edit_users_address_path(address), class: 'btn btn-info'%>
-
-        <%= button_to "Delete", users_address_path(address), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'  unless address.is_default %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <%= link_to 'Edit', edit_users_address_path(address), class: 'btn btn-info text-light', style: "--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;" %>
+          <%= button_to "Destroy", users_address_path(address), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger', style: "--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;" %>
+        </div>
       </div>
     </div>
     <br>

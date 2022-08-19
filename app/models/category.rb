@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   default_scope { where(deleted_at: nil) }
 
   def destroy
-    unless self.items.present?
+    unless items.present?
     update(deleted_at: Time.current)
     end
   end

@@ -1,7 +1,6 @@
 <!--Page-->
 <div class="container justify-content-center" style="margin-top: 100px">
-
-  <div class="card text-center bg-transparent" style="background-image: url('/141e60d5c88c9c2809dc2d0b0f82d3fb.jpeg'); background-size: 100%; border-radius: 20px" >
+  <div class="card text-center bg-transparent" style="background-image: url('/141e60d5c88c9c2809dc2d0b0f82d3fb.jpeg'); background-size: 100%; border-radius: 20px">
     <div class="card-header bg-transparent text-light" style="border-top-left-radius: 21px; border-top-right-radius: 21px">
       QR CODE
     </div>
@@ -21,13 +20,13 @@
 </div>
 
 <script>
-  function copy_url() {
-      const range = document.createRange();
-      range.selectNode(document.getElementById("link"));
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      document.execCommand("copy");
-      window.getSelection().removeAllRanges();
-  }
+    function copy_url() {
+        const range = document.createRange();
+        range.selectNode(document.getElementById("link"));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+    }
 </script>
 <%= render "layouts/nav" %>

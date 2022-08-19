@@ -33,7 +33,7 @@ class Admins::CategoriesController < AdminController
     if @category.deleted_at
       redirect_to admins_categories_path,  notice: 'Successfully Deleted!'
     else
-      redirect_to admins_categories_path,  notice: 'Cannot Be Deleted!'
+      redirect_to admins_categories_path,  alert: 'This category cant be deleted!!'
     end
   end
 

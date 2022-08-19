@@ -3,15 +3,10 @@
     <h1 style="font-family: Courier" class="text-light text-center"> Item List</h1>
   </div>
   <div>
-    <br>
-    <% if notice %>
-      <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <%= notice %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+    <br/>
+    <%= render 'layouts/errors_message' %>
     <table class="table text-center table-bordered ">
-      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'" >
+      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
       <tr>
         <th scope="col">Image</th>
         <th scope="col">Name</th>
@@ -28,17 +23,17 @@
       </tr>
       </thead>
       <tbody>
-      <% unless @items.present? %>
+      <% if @items.blank? %>
         <h2>No item to show</h2>
       <% end %>
       <% @items.each do |item| %>
         <tr>
-          <td><%= image_tag item.image.url, style: 'height:50px' if item.image?%></td>
+          <td><%= image_tag item.image.url, style: 'height:50px' if item.image.present? %></td>
           <td><%= item.name %></td>
           <td><%= item.quantity %></td>
           <td><%= item.minimum_bets %></td>
           <td><%= item.state %></td>
-          <td><%= item.category&.name %></td>
+          <td><%= item.category.name %></td>
           <td><%= item.batch_count %></td>
           <td><%= item.online_at %></td>
           <td><%= item.offline_at %></td>
@@ -46,7 +41,7 @@
           <td><%= item.status %></td>
           <td>
             <%= link_to 'Edit', edit_admins_item_path(item), class: 'btn btn-info' %>
-            <%= link_to 'Delete', admins_item_path(item), method: :delete, class: 'btn btn-danger' %>
+            <%= link_to 'Delete', admins_item_path(item), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
           </td>
         </tr>
       <% end %>

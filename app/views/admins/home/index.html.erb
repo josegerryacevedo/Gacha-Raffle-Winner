@@ -1,4 +1,4 @@
-    <div class="col py-3">
-        Hello <%=  current_admins_user.role %>!
-    </div>
-
+<div class="col py-3">
+  <%= render 'layouts/errors_message' %>
+  Hello <%= current_admins_user.role %>!
+</div>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   constraints(ClientDomainConstraint.new) do
-    root to:  'users/home#index', as: :client_root
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+    root to: 'users/home#index', as: :client_root
     namespace :users do
       get 'lottery', to: 'lotteries#lottery'
       get 'invite-people', to: 'invite_people#invite_qr'
@@ -11,12 +11,12 @@ Rails.application.routes.draw do
   end
 
   constraints(AdminDomainConstraint.new) do
-    namespace :admins , path: '' do
+    namespace :admins, path: '' do
       root to: 'home#index', as: :admin_root
       devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
-      resources :items, only: :index
-      resources :categories, only: :index
+      resources :items
+      resources :categories
     end
   end
 end

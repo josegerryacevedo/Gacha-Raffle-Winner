@@ -3,6 +3,8 @@ class Users::InvitePeopleController < ApplicationController
   before_action :url
   before_action :generate_qrcode
 
+  private
+
   def url
     if current_user
     @url="#{request.base_url}/users/sign_up?promoter=#{current_user&.email}"

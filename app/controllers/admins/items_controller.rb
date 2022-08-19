@@ -1,7 +1,8 @@
 class Admins::ItemsController < AdminController
   before_action :set_item, only: [:edit, :update, :destroy]
+
   def index
-    @items = Item.all
+    @items = Item.includes(:category)
   end
 
   def new
@@ -30,13 +31,15 @@ class Admins::ItemsController < AdminController
   def destroy
     if @item.destroy
       redirect_to admins_items_path, notice: 'Successfully Deleted!'
+    else
+      redirect_to admins_items_path, alert: 'Deleted Failed!!'
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit( :image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity, :category_id)
+    params.require(:item).permit(:image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity, :category_id)
   end
 
   def set_item

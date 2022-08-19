@@ -4,31 +4,26 @@
   </div>
   <div>
     <br>
-    <% if notice %>
-      <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <%= notice %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+    <%= render 'layouts/errors_message' %>
     <table class="table text-center table-bordered ">
-      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'" >
+      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
       <tr>
         <th scope="col">Category Name</th>
         <th scope="col">Actions</th>
       </tr>
       </thead>
       <tbody>
-      <% unless @categories.present? %>
+      <% if @categories.blank? %>
         <h2>No Category to show</h2>
       <% end %>
       <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.name %></td>
-        <td>
-          <%= link_to 'Edit', edit_admins_category_path(category), class: 'btn btn-info' %>
-          <%= link_to 'Delete', admins_category_path(category), method: :delete, class: 'btn btn-danger' %>
-        </td>
-      </tr>
+        <tr>
+          <td><%= category.name %></td>
+          <td>
+            <%= link_to 'Edit', edit_admins_category_path(category), class: 'btn btn-info' %>
+            <%= link_to 'Delete', admins_category_path(category), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
       <% end %>
       </tbody>
     </table>

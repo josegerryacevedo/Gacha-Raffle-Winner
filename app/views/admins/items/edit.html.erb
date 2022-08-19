@@ -4,56 +4,56 @@
   </div>
   <br>
   <div class="container">
-  <%= form_for @item, url: admins_item_path(@item), method: :patch do |f| %>
-
-    <div class="field">
-      <%= f.label :image %>
-      <%= f.file_field :image, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :quantity %>
-      <%= f.text_field :quantity, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :minimum_bets %>
-      <%= f.text_field :minimum_bets, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :state %>
-      <%= f.text_field :state, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :category_id %>
-      <%= f.collection_select :category_id, Category.order(:name),:id,:name, {:prompt => 'Category choice'}, include_blank: true, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :online_at %>
-      <%= f.datetime_field :online_at, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :offline_at %>
-      <%= f.datetime_field :offline_at, class: 'form-control' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :start_at %>
-      <%= f.date_field :start_at, class: 'form-control' %>
-    </div>
+    <%= form_for @item, url: admins_item_path(@item), method: :patch do |f| %>
 
       <div class="field">
-        <%= f.label :status, 'Status'%>
-        <%= f.select(:status, Item.statuses.keys.map {|key| [key.humanize, key]}, {:prompt => 'Status'}, class: 'form-control')%>
+        <%= f.label :image %>
+        <%= f.file_field :image, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :quantity %>
+        <%= f.text_field :quantity, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :minimum_bets %>
+        <%= f.text_field :minimum_bets, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :state %>
+        <%= f.text_field :state, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category_id %>
+        <%= f.collection_select :category_id, Category.order(:name), :id, :name, { :prompt => 'Category choice' }, include_blank: true, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :online_at %>
+        <%= f.datetime_field :online_at, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :offline_at %>
+        <%= f.datetime_field :offline_at, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :start_at %>
+        <%= f.date_field :start_at, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :status, 'Status' %>
+        <%= f.select(:status, Item.statuses.keys.map { |key| [key.humanize, key] }, { :prompt => 'Status' }, class: 'form-control') %>
       </div>
 
       <%= f.submit "Update", class: 'border btn btn-primary' %>

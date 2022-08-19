@@ -1,35 +1,35 @@
-    <div class="col py-3">
-      <div class="card" style="background-color: #000033">
-          <h1 style="font-family: Courier" class="text-light text-center"> Users List</h1>
-      </div>
-      <div>
-        <table class="table text-center table-bordered ">
-          <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'" >
-          <tr>
-            <th scope="col">Parent Email</th>
-            <th scope="col">Email</th>
-            <th scope="col">Total Deposit</th>
-            <th scope="col">Member Total Deposits</th>
-            <th scope="col">Coins</th>
-            <th scope="col">Total Used Coins</th>
-            <th scope="col">Children Members</th>
-            <th scope="col">Phone Number</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= user.parent&.email%></td>
-              <td><%= user.email%></td>
-              <td><%= user.total_deposit%></td>
-              <td></td>
-              <td><%= user.coins%></td>
-              <td></td>
-              <td><%= user.children_members%></td>
-              <td><%= user.phone%></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Users List</h1>
+  </div>
+  <div>
+    <table class="table text-center table-bordered ">
+      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+      <tr>
+        <th scope="col">Parent Email</th>
+        <th scope="col">Email</th>
+        <th scope="col">Total Deposit</th>
+        <th scope="col">Member Total Deposits</th>
+        <th scope="col">Coins</th>
+        <th scope="col">Total Used Coins</th>
+        <th scope="col">Children Members</th>
+        <th scope="col">Phone Number</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.parent&.email %></td>
+          <td><%= user.email %></td>
+          <td><%= user.total_deposit %></td>
+          <td></td>
+          <td><%= user.coins %></td>
+          <td></td>
+          <td><%= user.children_members %></td>
+          <td><%= user.phone %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

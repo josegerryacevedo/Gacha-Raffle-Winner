@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     state :starting, :paused, :ended, :cancelled
 
     event :start do
-      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity, guards: [:greater_than_zero?, :future?, :active?]
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity, guards: [:stay_at_zero?, :future?, :active?]
       transitions from: :paused, to: :starting
     end
 
@@ -47,7 +47,7 @@ class Item < ApplicationRecord
     update(quantity: @quantity, batch_count: @batch_count)
   end
 
-  def greater_than_zero?
+  def stay_at_zero?
     quantity > 0
   end
 
