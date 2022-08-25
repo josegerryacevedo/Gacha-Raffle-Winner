@@ -1,0 +1,73 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center">Bet List</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <%= form_tag({ url: admins_bets_path }, { method: :get }) do %>
+        <div class="row text-lg-start">
+          <div class="col-6">
+            <%= label_tag :serial_number %>
+            <%= text_field_tag :serial_number, '', class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= label_tag :product_name, 'Product Name' %>
+            <%= text_field_tag :product_name, '', class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= label_tag :email %>
+            <%= text_field_tag :email, '', class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= label_tag :state %>
+            <%= select_tag :state, options_for_select(Bet.aasm.states.map(&:name)), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
+          </div>
+        </div>
+        <div class="row text-lg-start">
+          <%= label_tag :date_created, 'Date Created' %>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">Start</span>
+              <%= datetime_field_tag :start, '', class: "form-control", value: params[:start] %>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">End</span>
+              <%= datetime_field_tag :end, '', class: "form-control", value: params[:end] %>
+            </div>
+          </div>
+        </div>
+        <%= link_to 'Reset', admins_bets_path, class: "btn btn-danger mt-2" %>
+        <%= submit_tag :Search, class: "btn btn-primary mt-2" %>
+      <% end %>
+
+      <table class="table text-start table-bordered ">
+        <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+        <tr>
+          <th scope="col">Serial Number</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">State</th>
+          <th scope="col">Created At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @bets.each do |bet| %>
+          <tr>
+            <td><%= bet.serial_number %></td>
+            <td><%= bet.item.name %></td>
+            <td><%= bet.user.email %></td>
+            <td><%= bet.state %></td>
+            <td><%= bet.created_at %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% if @bets.blank? %>
+        <h2 class="text-center text-danger">NO BET TO SHOW</h2>
+      <% end %>
+    </div>
+  </div>
+  <br>
+</div>

@@ -3,10 +3,10 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     root to: 'users/home#index', as: :client_root
     namespace :users do
-      get 'lottery', to: 'lotteries#lottery'
       get 'invite-people', to: 'invite_people#invite_qr'
       resource :profile
       resources :addresses
+      resources :lotteries
     end
   end
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :users
       resources :items
       resources :categories
+      resources :bets
     end
   end
 end

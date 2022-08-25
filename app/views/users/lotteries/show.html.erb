@@ -1,0 +1,80 @@
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+<section>
+  <div class="container py-5 p-7 bg-white">
+    <div class="row d-flex justify-content-center align-items-center pt-4">
+      <div class="col-12 col-md-10 col-lg-10 col-xl-7">
+        <%= render 'layouts/errors_message' %>
+        <div class="card-body">
+          <div class="h-100">
+            <%= image_tag @item.image.url, class: 'w-100' if @item.image.present? %>
+            <%= @item.name %>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+            <%= form_for @bet, url: users_lotteries_path(@bet), method: :post do |f| %>
+              <div class="field mt-2">
+                <%= f.hidden_field :item_id, value: @item.id %>
+                <div class="input-group mb-1">
+                  <button class="btn text-white" id="minus" style="background-color: #000033">−</button>
+                  <%= f.number_field :coins, min: 1, value: 1, class: 'form-control text-center' %>
+                  <button class="btn text-white" id="plus" style="background-color: #000033">+</button>
+                </div>
+              </div>
+              <%= f.submit "BET NOW!", class: 'btn form-control text-light mt-1', style: 'background-color: #000033' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-bordered table-striped  m-auto mt-3 text-light" style="width:95vw; max-width: 800px; background-color: #000033">
+      <thead>
+      <tr>
+        <th scope="col">Serial Number</th>
+      </tr>
+      <% if @current_bets.blank? %>
+        <tr>
+          <td class="text-center" style="vertical-align: middle; background-color: whitesmoke; color: #000033">- You still not Bet -</td>
+        </tr>
+      <% end %>
+      <% @current_bets.each do |current_bet| %>
+        <tr class="table-white text-center">
+          <td style="vertical-align: middle; background-color: whitesmoke; color: #000033"><%= current_bet.serial_number %></td>
+        </tr>
+      <% end %>
+      </thead>
+    </table>
+  </div>
+  </div>
+</section>
+
+<script>
+    const minusButton = document.getElementById('minus');
+    const plusButton = document.getElementById('plus');
+    const inputField = document.getElementById('bet_coins');
+
+    minusButton.addEventListener('click', event => {
+        event.preventDefault();
+        const currentValue = Number(inputField.value) || 0;
+        if (currentValue > 1) {
+            inputField.value = currentValue - 1;
+        }
+    });
+
+    plusButton.addEventListener('click', event => {
+        event.preventDefault();
+        const currentValue = Number(inputField.value) || 0;
+        inputField.value = currentValue + 1;
+    });
+</script>
+<%= render "layouts/nav" %>

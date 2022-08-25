@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_15_080307) do
+ActiveRecord::Schema.define(version: 2022_08_19_074315) do
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre"
     t.string "name"
     t.string "street_address"
     t.string "phone_number"
     t.string "remark"
     t.boolean "is_default"
-    t.integer "user_id"
-    t.integer "region_id"
-    t.integer "province_id"
-    t.integer "city_id"
-    t.integer "barangay_id"
+    t.bigint "user_id"
+    t.bigint "region_id"
+    t.bigint "province_id"
+    t.bigint "city_id"
+    t.bigint "barangay_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["barangay_id"], name: "index_addresses_on_barangay_id"
@@ -33,32 +33,45 @@ ActiveRecord::Schema.define(version: 2022_08_15_080307) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "barangays", force: :cascade do |t|
+  create_table "barangays", charset: "utf8mb4", force: :cascade do |t|
     t.string "code"
     t.string "name"
-    t.integer "city_id"
+    t.bigint "city_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_barangays_on_city_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "bets", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.string "serial_number"
+    t.integer "coins"
+    t.string "state"
+    t.integer "batch_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_bets_on_item_id"
+    t.index ["user_id"], name: "index_bets_on_user_id"
+  end
+
+  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
   end
 
-  create_table "cities", force: :cascade do |t|
+  create_table "cities", charset: "utf8mb4", force: :cascade do |t|
     t.string "code"
     t.string "name"
-    t.integer "province_id"
+    t.bigint "province_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_cities_on_province_id"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "image"
     t.string "name"
     t.integer "quantity"
@@ -72,20 +85,20 @@ ActiveRecord::Schema.define(version: 2022_08_15_080307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.index ["category_id"], name: "index_items_on_category_id"
   end
 
-  create_table "provinces", force: :cascade do |t|
+  create_table "provinces", charset: "utf8mb4", force: :cascade do |t|
     t.string "code"
     t.string "name"
-    t.integer "region_id"
+    t.bigint "region_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["region_id"], name: "index_provinces_on_region_id"
   end
 
-  create_table "regions", force: :cascade do |t|
+  create_table "regions", charset: "utf8mb4", force: :cascade do |t|
     t.string "code"
     t.string "name"
     t.string "region_name"
@@ -93,7 +106,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_080307) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "username"
@@ -113,7 +126,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_080307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

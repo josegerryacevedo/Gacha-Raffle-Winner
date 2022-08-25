@@ -32,7 +32,7 @@ class Admins::ItemsController < AdminController
     if @item.destroy
       redirect_to admins_items_path, notice: 'Successfully Deleted!'
     else
-      redirect_to admins_items_path, alert: 'Deleted Failed!!'
+      redirect_to admins_items_path, alert: "This can't be deleted, it has record on bet!!"
     end
   end
 

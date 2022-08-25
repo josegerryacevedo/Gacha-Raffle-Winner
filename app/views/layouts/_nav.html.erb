@@ -34,7 +34,7 @@
               <span class="text-secondary">Email:</span> <%= current_user.email %>
             </li>
             <li class="nav-item">
-              <span class="text-secondary">Coins:</span>
+              <span class="text-secondary">Coins:</span><%= current_user.coins %>
             </li>
             <div class="d-grid gap-2">
               <button class="btn btn-primary" type="button">CASH IN NOW</button>
@@ -72,7 +72,7 @@
     <%= link_to "Invite", users_invite_people_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <%= link_to "Lottery", users_lottery_path, class: 'nav-link', style: 'color: #000033' %>
+    <%= link_to "Lottery", users_lotteries_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
     <a class="nav-link" style="color: #000033" href="#">Shop</a>

@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-      <br>
+      <%= f.label :genre %>
       <%= f.select(:genre, Address.genres.keys.map { |key| [key.humanize, key] }, { :prompt => 'Genre' }, class: 'form-control') %>
     </div>
 
