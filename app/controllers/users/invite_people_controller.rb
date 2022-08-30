@@ -1,5 +1,4 @@
 class Users::InvitePeopleController < ApplicationController
-  require "rqrcode"
   before_action :url
   before_action :generate_qrcode
 
@@ -7,7 +6,7 @@ class Users::InvitePeopleController < ApplicationController
 
   def url
     if current_user
-    @url="#{request.base_url}/users/sign_up?promoter=#{current_user&.email}"
+    @url="#{request.base_url}/users/sign_up?promoter=#{current_user.email}"
     else
       @url="#{request.base_url}/users/sign_up"
     end

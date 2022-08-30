@@ -19,7 +19,7 @@
     <% end %>
   </div>
   <% @addresses.each do |address| %>
-    <div class="card bg-light border-dark" style="font-family: 'Apple SD Gothic Neo'">
+    <div class="card bg-light border-dark mb-2" style="font-family: 'Apple SD Gothic Neo'">
       <div class="card-body">
         <%= content_tag :div, 'Default', class: 'badge rounded-pill text-bg-dark text-light' if address.is_default %>
         <%= content_tag :div, address.genre, class: 'badge rounded-pill text-bg-dark text-light' %>
@@ -42,7 +42,6 @@
         </div>
       </div>
     </div>
-    <br>
   <% end %>
 </div>
 <%= render "layouts/nav" %>

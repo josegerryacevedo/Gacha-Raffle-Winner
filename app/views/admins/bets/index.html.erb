@@ -8,15 +8,15 @@
         <div class="row text-lg-start">
           <div class="col-6">
             <%= label_tag :serial_number %>
-            <%= text_field_tag :serial_number, '', class: "form-control" %>
+            <%= text_field_tag :serial_number, params[:serial_number], class: "form-control" %>
           </div>
           <div class="col-6">
             <%= label_tag :product_name, 'Product Name' %>
-            <%= text_field_tag :product_name, '', class: "form-control" %>
+            <%= text_field_tag :product_name, params[:product_name], class: "form-control" %>
           </div>
           <div class="col-6">
             <%= label_tag :email %>
-            <%= text_field_tag :email, '', class: "form-control" %>
+            <%= text_field_tag :email, params[:email], class: "form-control" %>
           </div>
           <div class="col-6">
             <%= label_tag :state %>
@@ -28,13 +28,13 @@
           <div class="col-6">
             <div class="input-group">
               <span class="input-group-text">Start</span>
-              <%= datetime_field_tag :start, '', class: "form-control", value: params[:start] %>
+              <%= datetime_field_tag :start, params[:start] , class: "form-control" %>
             </div>
           </div>
           <div class="col-6">
             <div class="input-group">
               <span class="input-group-text">End</span>
-              <%= datetime_field_tag :end, '', class: "form-control", value: params[:end] %>
+              <%= datetime_field_tag :end, params[:end], class: "form-control" %>
             </div>
           </div>
         </div>

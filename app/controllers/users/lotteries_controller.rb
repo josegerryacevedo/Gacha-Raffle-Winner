@@ -10,7 +10,7 @@ class Users::LotteriesController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @current_bets = @item.bets.where(user: current_user)
+    @current_bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
     @bet = Bet.new
   end
 

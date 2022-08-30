@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   def destroy
     unless bets.present?
-    update(deleted_at: Time.current)
+      update(deleted_at: Time.current)
     end
   end
 
@@ -59,6 +59,6 @@ class Item < ApplicationRecord
   end
 
   def cancel_bet
-    bets.where(batch_count: batch_count).each {| bet | bet.cancel! }
+    bets.where(batch_count: batch_count).each { |bet| bet.cancel! }
   end
 end
