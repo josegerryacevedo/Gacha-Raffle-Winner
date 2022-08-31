@@ -32,10 +32,11 @@ class Users::AddressesController  < ApplicationController
 
   def destroy
     if @address.destroy
-      redirect_to users_addresses_path, notice: 'Successfully Deleted'
+      flash[:notice] = "Successfully Deleted"
     else
-      redirect_to users_addresses_path, alert: 'Default Address Cant Be Destroy!'
+      flash[:notice] = "Default Address Cant Be Destroy!"
     end
+    redirect_to users_addresses_path
   end
 
   private

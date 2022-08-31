@@ -31,10 +31,11 @@ class Admins::CategoriesController < AdminController
   def destroy
     @category.destroy
     if @category.deleted_at
-      redirect_to admins_categories_path,  notice: 'Successfully Deleted!'
+      flash[:notice] = "Successfully Deleted!"
     else
-      redirect_to admins_categories_path,  alert: 'This cant be deleted, it has record on item!!'
+      flash[:alert] = "This cant be deleted, it has record on item!"
     end
+    redirect_to admins_categories_path
   end
 
   private
