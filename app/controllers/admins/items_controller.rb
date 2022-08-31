@@ -1,5 +1,5 @@
 class Admins::ItemsController < AdminController
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :destroy, :start, :pause, :cancel, :end]
 
   def index
     @items = Item.includes(:category)
@@ -30,10 +30,47 @@ class Admins::ItemsController < AdminController
 
   def destroy
     if @item.destroy
-      redirect_to admins_items_path, notice: 'Successfully Deleted!'
+      flash[:notice] = "Successfully Deleted!"
     else
-      redirect_to admins_items_path, alert: "This can't be deleted, it has record on bet!!"
+      flash[:alert] = "This can't be deleted, it has record on bet!"
     end
+    redirect_to admins_items_path
+  end
+
+  def start
+    if @item.start!
+      flash[:notice] = "Successfully Started!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admins_items_path
+  end
+
+  def pause
+    if @item.pause!
+      flash[:notice] = "Successfully Paused!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admins_items_path
+  end
+
+  def cancel
+    if @item.cancel!
+      flash[:notice] = "Successfully Cancelled!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admins_items_path
+  end
+
+  def end
+    if @item.end!
+      flash[:notice] = "Successfully Ended!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admins_items_path
   end
 
   private
@@ -43,6 +80,6 @@ class Admins::ItemsController < AdminController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id] || params[:item_id])
   end
 end
