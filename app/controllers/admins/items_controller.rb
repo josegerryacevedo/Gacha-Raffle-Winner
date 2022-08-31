@@ -66,7 +66,7 @@ class Admins::ItemsController < AdminController
 
   def end
     if @item.end!
-      flash[:notice] = "Successfully Ended!"
+      flash[:notice] = "Successfully Draw!"
     else
       flash[:alert] = @item.errors.full_messages.join(', ')
     end

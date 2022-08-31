@@ -31,7 +31,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended
+      transitions from: :starting, to: :ended, after: :random_winner, guards: :allow_transition?
     end
 
     event :cancel, after: [:cancel_bet, :add_quantity] do
@@ -59,6 +59,19 @@ class Item < ApplicationRecord
   end
 
   def cancel_bet
-    bets.where(batch_count: batch_count).each { |bet| bet.cancel! }
+    bets.where(batch_count: batch_count).where.not(state: :cancelled).each { |bet| bet.cancel! }
+  end
+
+  def allow_transition?
+    bets.where(batch_count: batch_count).count >= minimum_bets
+  end
+
+  def random_winner
+    bet_item = bets.where(batch_count: batch_count).where.not(state: :cancelled)
+    winner = bet_item.sample
+    winner.win!
+    bet_item.where.not(state: :won).update(state: :lost)
+    store_winner = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
+    store_winner.save!
   end
 end
