@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   validates :image, :name, :quantity, :minimum_bets, :state, :online_at, :offline_at, :start_at, :status, presence: true
-  validates :quantity, numericality: { greater_than: 0 }
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
   has_many :bets
   belongs_to :category
 
@@ -51,7 +51,7 @@ class Item < ApplicationRecord
   end
 
   def stay_at_zero?
-    quantity > 0
+    quantity >= 0
   end
 
   def future?

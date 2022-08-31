@@ -27,11 +27,6 @@
       </div>
 
       <div class="field">
-        <%= f.label :state %>
-        <%= f.text_field :state, class: 'form-control' %>
-      </div>
-
-      <div class="field">
         <%= f.label :category_id %>
         <%= f.collection_select :category_id, Category.order(:name), :id, :name, { :prompt => 'Category choice' }, include_blank: true, class: 'form-control' %>
       </div>
@@ -59,6 +54,6 @@
       <%= f.submit "Submit", class: 'border btn btn-primary' %>
     <% end %>
   </div>
-  <%= link_to 'Back', admins_items_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back', admins_items_path, class: 'btn text-light', style: 'background-color: #000033' %>
 </div>
 

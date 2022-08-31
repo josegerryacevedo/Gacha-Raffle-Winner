@@ -4,6 +4,7 @@
   </div>
   <br>
   <div class="container">
+    <%= render "users/shared/error_messages", resource: @item %>
     <%= form_for @item, url: admins_item_path(@item), method: :patch do |f| %>
 
       <div class="field">
@@ -24,11 +25,6 @@
       <div class="field">
         <%= f.label :minimum_bets %>
         <%= f.text_field :minimum_bets, class: 'form-control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :state %>
-        <%= f.text_field :state, class: 'form-control' %>
       </div>
 
       <div class="field">
@@ -59,5 +55,5 @@
       <%= f.submit "Update", class: 'border btn btn-primary' %>
     <% end %>
   </div>
-  <%= link_to 'Back', admins_items_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back', admins_items_path, class: 'btn text-light', style: 'background-color: #000033' %>
 </div>
