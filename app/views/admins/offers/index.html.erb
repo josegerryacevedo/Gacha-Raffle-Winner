@@ -1,0 +1,60 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center">Offer List</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <%= form_tag({ url: admins_offers_path }, { method: :get }) do %>
+        <div class="row">
+          <div class="col-md-5">
+            <%= label_tag :status %>
+            <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |key| [key.humanize, key] }, params[:status]), { prompt: 'Search Status', class: "form-control form-select text-center text-primary" } %>
+          </div>
+          <div class="col-md-5">
+            <%= label_tag :genre %>
+            <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |key| [key.humanize, key] }, params[:genre]), { prompt: 'Search Genre', class: "form-control form-select text-center text-primary" } %>
+          </div>
+          <div class="col-md-2 mt-5 text-end">
+            <%= link_to 'Reset', admins_offers_path, class: "btn btn-danger btn-sm" %>
+            <%= submit_tag :Search, class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+        <div>
+        </div>
+      <% end %>
+      <table class="table text-center table-bordered mt-2">
+        <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Status</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Coin</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @offers.each do |offer| %>
+          <tr>
+            <td><%= image_tag offer.image.url, style: 'height:50px; width:100px' if offer.image.present? %></td>
+            <td><%= offer.name %></td>
+            <td><%= offer.genre %></td>
+            <td><%= offer.status %></td>
+            <td><%= offer.amount %></td>
+            <td><%= offer.coin %></td>
+            <td>
+              <%= link_to 'Edit', edit_admins_offer_path(offer), class: 'btn btn-primary btn-sm' %>
+              <%= link_to 'Delete', admins_offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% if @offers.blank? %>
+        <h2 class="text-center text-danger">NO OFFER TO SHOW</h2>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to 'Add Offer', new_admins_offer_path, class: 'btn text-light mt-1', style: 'background-color: #000033' %>
+</div>

@@ -1,0 +1,48 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Create Items</h1>
+  </div>
+  <br>
+  <div class="container">
+    <%= form_for @offer, url: admins_offer_path(@offer), method: :patch do |f| %>
+
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.file_field :image, class: 'form-control' %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:image).join(', '), class: 'text-danger' if @offer.errors.has_key?(:image) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:name).join(', '), class: 'text-danger' if @offer.errors.has_key?(:name) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :amount %>
+        <%= f.text_field :amount, class: 'form-control' %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:amount).join(', '), class: 'text-danger' if @offer.errors.has_key?(:amount) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :coin %>
+        <%= f.text_field :coin, class: 'form-control' %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:coin).join(', '), class: 'text-danger' if @offer.errors.has_key?(:coin) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :genre %>
+        <%= f.select(:genre, Offer.genres.keys.map { |key| [key.humanize, key] }, { :prompt => 'Choose Genres' }, class: 'form-control') %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:genre).join(', '), class: 'text-danger' if @offer.errors.has_key?(:genre) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :status, 'Status' %>
+        <%= f.select(:status, Offer.statuses.keys.map { |key| [key.humanize, key] }, { :prompt => 'Choose Statuses' }, class: 'form-control') %>
+        <%= content_tag :p, @offer.errors.full_messages_for(:status).join(', '), class: 'text-danger' if @offer.errors.has_key?(:status) %>
+      </div>
+      <%= f.submit "Update", class: 'border btn btn-primary mt-1' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_offers_path, class: 'btn text-light', style: 'background-color: #000033' %>
+</div>
