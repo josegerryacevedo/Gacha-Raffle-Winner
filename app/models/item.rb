@@ -31,7 +31,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended, after: :random_winner, guards: :allow_transition?
+      transitions from: :starting, to: :ended, after: :random_winner, guards: :minimum_bet?
     end
 
     event :cancel, after: [:cancel_bet, :return_quantity] do
@@ -62,7 +62,7 @@ class Item < ApplicationRecord
     bets.where(batch_count: batch_count).where.not(state: :cancelled).each { |bet| bet.cancel! }
   end
 
-  def allow_transition?
+  def minimum_bet?
     bets.where(batch_count: batch_count).count >= minimum_bets
   end
 
