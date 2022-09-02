@@ -34,12 +34,12 @@ class Item < ApplicationRecord
       transitions from: :starting, to: :ended, after: :random_winner, guards: :allow_transition?
     end
 
-    event :cancel, after: [:cancel_bet, :add_quantity] do
+    event :cancel, after: [:cancel_bet, :return_quantity] do
       transitions from: [:starting, :paused], to: :cancelled
     end
   end
 
-  def add_quantity
+  def return_quantity
     @add_quantity = self.quantity + 1
     update(quantity: @add_quantity)
   end
