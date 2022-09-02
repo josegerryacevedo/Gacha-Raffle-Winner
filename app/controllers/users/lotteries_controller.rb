@@ -41,7 +41,7 @@ class Users::LotteriesController < ApplicationController
   private
 
   def bet_params
-    params.require(:bet).permit(:item_id, :coins)
+    params.require(:bet).permit(:item_id, :coins, :batch_count)
   end
 
   def set_item
