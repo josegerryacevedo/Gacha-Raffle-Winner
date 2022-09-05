@@ -1,5 +1,5 @@
 class Admins::ItemsController < AdminController
-  before_action :set_item, only: [:edit, :update, :destroy, :start, :pause, :cancel, :end]
+  before_action :set_item, except: [:index, :new, :create]
 
   def index
     @items = Item.includes(:category)

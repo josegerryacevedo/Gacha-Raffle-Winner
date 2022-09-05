@@ -41,7 +41,7 @@
           <td><%= item.status %></td>
           <td>
             <div class="m-1">
-              <%= link_to "Start", admins_item_start_path(item), class: 'btn btn-outline-info btn-sm', method: :put if item.may_start? %>
+              <%= link_to "Start", admins_item_start_path(item), class: 'btn btn-outline-info btn-sm', data: { confirm: "Are you sure?" }, method: :put if item.may_start? %>
               <%= link_to "Pause", admins_item_pause_path(item), class: 'btn btn-outline-info btn-sm', data: { confirm: "Are you sure?" }, method: :put if item.may_pause? %>
               <%= link_to "Cancel", admins_item_cancel_path(item), class: 'btn btn-outline-info btn-sm', data: { confirm: "Are you sure?" }, method: :put if item.may_cancel? %>
             </div>

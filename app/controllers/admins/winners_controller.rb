@@ -1,5 +1,5 @@
 class Admins::WinnersController < AdminController
-  before_action :set_winner, only: [:submit, :pay, :ship, :deliver, :publish, :remove_publish]
+  before_action :set_winner, except: :index
 
   def index
     @winners = Winner.includes(:user, :item, :bet, :address)
@@ -67,6 +67,6 @@ class Admins::WinnersController < AdminController
   private
 
   def set_winner
-    @winner = Winner.find params[:winner_id]
+    @winner = Winner.find(params[:winner_id])
   end
 end

@@ -20,7 +20,7 @@
           </div>
           <div class="col-6">
             <%= label_tag :state %>
-            <%= select_tag :state, options_for_select(Bet.aasm.states.map(&:name)), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
+            <%= select_tag :state, options_for_select(Bet.aasm.states.map(&:name), params[:state]), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
           </div>
         </div>
         <div class="row text-lg-start">

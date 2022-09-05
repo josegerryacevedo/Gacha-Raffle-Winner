@@ -63,14 +63,14 @@ class Item < ApplicationRecord
   end
 
   def greater_than_minimum_bet?
-    bets.where(batch_count: batch_count).count >= minimum_bets
+    bets.where(batch_count: batch_count).betting.count >= minimum_bets
   end
 
   def random_winner
-    bet_item = bets.where(batch_count: batch_count).where.not(state: :cancelled)
+    bet_item = bets.where(batch_count: batch_count).betting
     winner = bet_item.sample
     winner.win!
-    bet_item.where.not(state: :won).update(state: :lost)
+    bet_item.where.not(state: :won).each { |bet| bet.lose! }
     store_winner = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
     store_winner.save!
   end

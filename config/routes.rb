@@ -19,10 +19,10 @@ Rails.application.routes.draw do
         put :start, :pause, :cancel, :end
       end
       resources :categories
-      resources :bets do
+      resources :bets, only: :index do
         put :cancel
       end
-      resources :winners do
+      resources :winners, only: :index do
         put :submit, :pay, :ship, :deliver, :publish, :remove_publish
       end
       resources :offers

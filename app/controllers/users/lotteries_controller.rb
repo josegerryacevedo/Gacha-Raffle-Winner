@@ -9,13 +9,9 @@ class Users::LotteriesController < ApplicationController
   end
 
   def show
-    if @items = Item.active.starting.find_by_id(params[:id])
-      @item = Item.find(params[:id])
-      @current_bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
-      @bet = Bet.new
-    else
-      render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
-    end
+    @item = Item.active.starting.find(params[:id])
+    @current_bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count).betting
+    @bet = Bet.new
   end
 
   def create
