@@ -1,0 +1,105 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center">Order List</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <%= form_tag({ url: admins_offers_path }, { method: :get }) do %>
+        <div class="row text-lg-start">
+          <div class="col-4">
+            <%= label_tag :serial_number %>
+            <%= text_field_tag :serial_number, params[:serial_number], class: "form-control" %>
+          </div>
+          <div class="col-4">
+            <%= label_tag :email %>
+            <%= text_field_tag :email, params[:email], class: "form-control" %>
+          </div>
+          <div class="col-4">
+            <%= label_tag :state %>
+            <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name), params[:state]), { prompt: 'Select State', class: "form-control form-select text-center" } %>
+          </div>
+          <div class="col-6">
+            <%= label_tag :genre %>
+            <%= select_tag :genre, options_for_select(Order.genres.keys.map { |key| [key.humanize, key] }, params[:genre]), { prompt: 'Search Genre', class: "form-control form-select text-center" } %>
+          </div>
+          <div class="col-6">
+            <%= label_tag :offer %>
+            <%= select_tag :offer, options_for_select(Offer.pluck(:name, :id), params[:offer]), { prompt: 'Select Offer', class: "form-control form-select text-center" } %>
+          </div>
+        </div>
+        <div class="row text-lg-start">
+          <%= label_tag :date_created, 'Date Created' %>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">Start</span>
+              <%= datetime_field_tag :start, params[:start], class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">End</span>
+              <%= datetime_field_tag :end, params[:end], class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <%= link_to 'Reset', admins_orders_path, class: "btn btn-danger mt-2 mb-2 btn-sm" %>
+        <%= submit_tag :Search, class: "btn btn-primary mt-2 mb-2 btn-sm" %>
+      <% end %>
+      <%= render 'layouts/errors_message' %>
+      <table class="table text-start table-bordered text-center">
+        <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+        <tr>
+          <th scope="col">Serial Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Genre</th>
+          <th scope="col">State</th>
+          <th scope="col">Offer Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Coins</th>
+          <th scope="col">Created At</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.serial_number %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order.genre %></td>
+            <td><%= order.state %></td>
+            <td><%= order.offer.name %></td>
+            <td><%= order.amount %></td>
+            <td><%= order.coin %></td>
+            <td><%= order.created_at %></td>
+            <td>
+              <%= link_to "Pay", admins_order_pay_path(order), data: { confirm: "Are you sure?" }, class: 'btn btn-outline-info btn-sm', method: :put if order.may_pay? %>
+              <%= link_to "Cancel", admins_order_cancel_path(order), data: { confirm: "Are you sure?" }, class: 'btn btn-outline-info btn-sm', method: :put if order.may_cancel? %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% if @orders.blank? %>
+        <h2 class="text-center text-danger">NO ORDER TO SHOW</h2>
+      <% end %>
+      <div class="text-center p-3">
+        <div class="d-inline fw-bold m-4" style="color: #000033">
+          Total Coins:
+          <span class="badge bg-info rounded-pill"><%= @total_coin %></span>
+        </div>
+        <div class="d-inline fw-bold m-4" style="color: #000033">
+          Sub Total Coins:
+          <span class="badge bg-info rounded-pill"><%= @subtotal_coin %></span>
+        </div>
+        <div class="d-inline fw-bold m-4" style="color: #000033">
+          Total Amount:
+          <span class="badge bg-info rounded-pill"><%= @total_amount %></span>
+        </div>
+        <div class="d-inline fw-bold m-4" style="color: #000033">
+          Sub Total Amount:
+          <span class="badge bg-info rounded-pill"><%= @subtotal_amount %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

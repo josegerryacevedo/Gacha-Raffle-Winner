@@ -29,6 +29,9 @@ Rails.application.routes.draw do
         put :submit, :pay, :ship, :deliver, :publish, :remove_publish
       end
       resources :offers
+      resources :orders, only: :index do
+        put :pay, :cancel
+      end
     end
   end
 end
