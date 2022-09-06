@@ -30,23 +30,109 @@
       </div>
     </div>
   </div>
+  <div class="text-start p-2 mt-2 mb-2">
+    <%= link_to "Order History", users_profile_path(history: 'order'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
+    <%= link_to "Lottery History", users_profile_path(history: 'bet'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
+    <%= link_to "Invite History", users_profile_path(history: 'invite'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
+    <%= link_to "Winning History", users_profile_path(history: 'winner'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
+  </div>
+  <%= render 'layouts/errors_message' %>
+  <% @orders&.each do |order| %>
+    <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
+      <div class="card-body">
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Serial Number:</span> <%= order.serial_number %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Amount</span> <%= order.amount %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Coins:</span> <%= order.coin %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Created At</span> <%= order.created_at %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">State</span> <%= order.state %>
+          </label>
+        </div>
+        <% if @orders.blank? %>
+          <div class="card-body">
+            <h2>No Record Found</h2>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% @bets&.each do |bet| %>
+    <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
+      <div class="card-body">
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Serial Number:</span> <%= bet.serial_number %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Created At</span> <%= bet.created_at %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">State</span> <%= bet.state %>
+          </label>
+        </div>
+        <% if @bets.blank? %>
+          <div class="card-body">
+            <h2>No Record Found</h2>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% @invites&.each do |invite| %>
+    <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
+      <div class="card-body">
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Email:</span> <%= invite.email %>
+          </label>
+        </div>
+        <% if @invites.blank? %>
+          <div class="card-body">
+            <h2>No Record Found</h2>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% @winners&.each do |winner| %>
+    <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
+      <div class="card-body">
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Serial Number:</span> <%= winner.bet.serial_number %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Item Name::</span> <%= winner.item.name %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Created At:</span> <%= winner.created_at %>
+          </label>
+        </div>
+        <div>
+          <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">State:</span> <%= winner.state %>
+          </label>
+        </div>
+        <% if @winners.blank? %>
+          <div class="card-body">
+            <h2>No Record Found</h2>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 </div>
 <%= render "layouts/nav" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
