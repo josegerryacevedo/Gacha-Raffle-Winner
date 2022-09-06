@@ -60,7 +60,7 @@ class Order < ApplicationRecord
   def serial_number
     ActiveRecord::Base.connection.execute("UPDATE `orders` SET `orders`.`serial_number` = CONCAT(DATE_FORMAT(CONVERT_TZ(orders.created_at, '+00:00', '+8:00'), '%y%m%d'),'-',#{id},'-',#{user.id},'-',
                                                   (SELECT LPAD(count(*), 4, 0)
-                                                   FROM `orders` where `orders`.`user_id` = #{user.id}
+                                                   FROM `orders` where `orders`.`user_id` = #{user.id}))
                                                    WHERE orders.id = #{id}")
   end
 end

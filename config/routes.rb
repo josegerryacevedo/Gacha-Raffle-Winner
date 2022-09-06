@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       resource :profile
       resources :addresses
       resources :lotteries
+      resources :offers, path: 'shop', only: :index do
+        post :order
+      end
     end
   end
 

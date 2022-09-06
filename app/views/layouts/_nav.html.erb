@@ -75,7 +75,7 @@
     <%= link_to "Lottery", users_lotteries_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <a class="nav-link" style="color: #000033" href="#">Shop</a>
+    <%= link_to "Shop", users_offers_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
     <%= link_to "Me", users_profile_path, class: 'nav-link', style: 'color: #000033' if current_user %>
