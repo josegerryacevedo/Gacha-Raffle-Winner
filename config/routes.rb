@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       resources :offers, path: 'shop', only: :index do
         post :order
       end
+      scope :orders, path: 'orders', as: 'orders' do
+        put "cancel/:order_id", to: 'orders#cancel'
+      end
     end
   end
 
