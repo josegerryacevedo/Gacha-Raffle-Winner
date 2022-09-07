@@ -4,6 +4,7 @@ class Winner < ApplicationRecord
   belongs_to :bet
   belongs_to :address, optional: true
   belongs_to :admin, class_name: "User", optional: true
+  mount_uploader :picture, ImageUploader
 
   include AASM
   aasm column: :state do

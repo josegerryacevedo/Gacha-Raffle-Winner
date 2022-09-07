@@ -1,0 +1,35 @@
+<!--Show Page-->
+<div class="container" style="margin-top: 100px; height: 100vh">
+  <div class="card border-0">
+    <h5 class="card-header text-light text-center" style="background-color: #000033">Claim Prize</h5>
+    <%= render 'layouts/errors_message' %>
+    <div class="card-body m-3">
+      <h3>Winning Bet</h3>
+      <div>Serial Number: <%= @winner.bet.serial_number %></div>
+      <div>Item Name: <%= @winner.item.name %></div>
+      <div>Date Created: <%= @winner.created_at %></div>
+      <div class="mt-3">
+        <%= form_for @winner, url: users_share_path(@winner), method: :patch do |f| %>
+          <div class="field">
+            <%= f.label :image %>
+            <%= f.file_field :picture, class: 'form-control' %>
+          </div>
+          <div class="field">
+            <%= f.label :comment %>
+            <%= f.text_area :comment, class: 'form-control form-control-sm' %>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.submit "Share", class: 'border btn form-control text-light mt-2', style: 'background-color: #000033' %>
+            </div>
+            <div class="col-sm-2">
+              <%= link_to "Back", users_profile_path, class: 'border btn form-control text-light mt-2', style: 'background-color: #000033' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<%= render "layouts/nav" %>

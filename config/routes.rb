@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     root to: 'users/home#index', as: :client_root
     namespace :users do
       get 'invite-people', to: 'invite_people#invite_qr'
+      resources :winners, only: [:show, :update]
+      resources :shares, only: [:show, :update]
       resource :profile
       resources :addresses
       resources :lotteries

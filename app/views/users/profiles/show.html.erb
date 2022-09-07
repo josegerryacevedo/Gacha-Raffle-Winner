@@ -1,5 +1,5 @@
 <!--Show Page-->
-<div class="container" style="margin-top: 100px">
+<div class="container" style="margin-top: 100px; height: 110vh">
   <%= render 'layouts/errors_message' %>
   <div class="card border-0">
     <div class="card-body">
@@ -36,7 +36,6 @@
     <%= link_to "Invite History", users_profile_path(history: 'invite'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
     <%= link_to "Winning History", users_profile_path(history: 'winner'), class: 'd-inline btn btn-sm text-light', style: 'background-color: #000033' %>
   </div>
-  <%= render 'layouts/errors_message' %>
   <% @orders&.each do |order| %>
     <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
       <div class="card-body">
@@ -106,8 +105,9 @@
       </div>
     </div>
   <% end %>
+
   <% @winners&.each do |winner| %>
-    <div class="card bg-light border-dark mb-1" style="font-family: 'Apple SD Gothic Neo'">
+    <div class="card bg-light border-dark mb-2" style="font-family: 'Apple SD Gothic Neo'">
       <div class="card-body">
         <div>
           <label for="colFormLabelSm" class="col-sm-12 col-form-label col-form-label-sm"><span class="text-secondary">Serial Number:</span> <%= winner.bet.serial_number %>
@@ -130,9 +130,12 @@
             <h2>No Record Found</h2>
           </div>
         <% end %>
+        <%= link_to "Claim", users_winner_path(winner), class: 'btn btn-info text-light', style: "--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;" if winner.may_claim? %>
+        <%= link_to "Share", users_share_path(winner), class: 'btn btn-danger text-light', style: "--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;" if winner.may_share? %>
       </div>
     </div>
   <% end %>
+</div>
 </div>
 </div>
 <%= render "layouts/nav" %>
