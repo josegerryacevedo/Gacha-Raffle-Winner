@@ -1,3 +1,5 @@
 class Users::HomeController < ApplicationController
-  def index; end
+  def index
+    @winners = Winner.published
+  end
 end
