@@ -15,12 +15,13 @@ class Order < ApplicationRecord
     end
 
     event :pay do
-      transitions from: :submitted, to: :paid, guard: :check_user_coin, after: [:pay_change_user_coins, :increase_total_deposit, :check_user_coin]
+      transitions from: :submitted, to: :paid, after: :increase_total_deposit
+      transitions from: :pending, to: :paid, guard: :on_cancel_check_user_coin, after: :pay_change_user_coins
     end
 
     event :cancel do
       transitions from: [:pending, :submitted], to: :cancelled
-      transitions from: :paid, to: :cancelled, after: [:cancel_change_user_coins, :deduct_total_deposit]
+      transitions from: :paid, to: :cancelled, guard: :check_user_coin?, after: [:cancel_change_user_coins, :deduct_total_deposit]
     end
   end
 
@@ -48,11 +49,21 @@ class Order < ApplicationRecord
     user.update(total_deposit: user.total_deposit - amount) if deposit?
   end
 
-  def check_user_coin
-    if (user.coins >= coin) && !deduct?
+  def check_user_coin?
+    return true if deduct?
+    user_coins
+  end
+
+  def on_cancel_check_user_coin
+    return true if !deduct?
+    user_coins
+  end
+
+  def user_coins
+    if (user.coins >= coin)
       true
     else
-      error.base(base: 'Not Enough Coin!')
+      errors.add(:base, 'Not Enough Coins!')
       false
     end
   end
