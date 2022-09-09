@@ -1,0 +1,11 @@
+<section>
+  <div class="container bg-white" style="margin-top:60px">
+    <div class="p-2 pt-3">
+      <%= image_tag @winner.picture.url, class: 'w-100' if @winner.picture.present? %>
+      <h6 class="pt-1 text-danger"><%= @winner.user.username %></h6>
+      <h6><%= @winner.comment %></h6>
+    </div>
+  </div>
+  </div>
+</section>
+<%= render "layouts/nav" %>

@@ -14,12 +14,16 @@ class Users::OffersController < ApplicationController
     @order.user = current_user
     @order.offer = @offer
     if @order.save
-      flash[:notice] = "Order successfully"
+      if @order.may_submit? && @order.submit!
+        flash[:notice] = "Order successfully!"
+      else
+        flash[:alert] = @order.errors.full_messages.join(', ')
+      end
       redirect_to users_offers_path
     else
-      flash[:alert] = @order.errors.full_messages.join(', ')
       render :index
     end
+
   end
 
   private

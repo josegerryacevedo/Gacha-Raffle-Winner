@@ -1,0 +1,78 @@
+<div class="col py-3">
+  <div class="container">
+    <div class="card mb-2" style="background-color: #000033">
+      <h1 style="font-family: Courier" class="text-light text-center">Admin Balance Operate</h1>
+    </div>
+    <%= render 'layouts/errors_message' %>
+    <div class="row">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header" style="background-color: #000033">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <%= link_to "Increase", new_admins_user_increase_path, class: 'nav-link active' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Deduct", new_admins_user_deduction_path, class: 'nav-link text-white' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Bonus", new_admins_user_bonuse_path, class: 'nav-link text-white' %>
+              </li>
+            </ul>
+          </div>
+          <%= form_for @order, url: admins_user_increases_path(@user), method: :post do |f| %>
+            <div class="card-body">
+              <div class="col">
+                <div class="input-group">
+                  <span class="input-group-text text-light" style="background-color: #000033">Coins</span>
+                  <%= f.number_field :coin, min: 0, value: 0, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col mt-1">
+                <div class="input-group">
+                  <span class="input-group-text text-light" style="background-color: #000033">Remarks</span>
+                  <%= f.text_area :remarks, class: "form-control" %>
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col">
+                  <%= link_to "Back", admins_users_path, class: 'border btn form-control text-light', style: 'background-color: #000033' %>
+                </div>
+                <div class="col">
+                  <%= f.submit "Increase", data: { confirm: "Are you sure, you want to increase?" }, class: 'border btn form-control text-light', style: 'background-color: #000033' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header fw-bold text-light" style="background-color: #000033">
+            User Details
+          </div>
+          <div class="card-body">
+            <div class="col">
+              <div class="input-group">
+                <span class="input-group-text text-light" style="background-color: #000033">Username</span>
+                <%= text_field_tag :username, @user.username, class: "form-control", readonly: true %>
+              </div>
+            </div>
+            <div class="col mt-1">
+              <div class="input-group">
+                <span class="input-group-text text-light" style="background-color: #000033">Promoter Name</span>
+                <%= text_field_tag :parent_email, @user.parent.email, class: "form-control", readonly: true %>
+              </div>
+            </div>
+            <div class="col mt-1">
+              <div class="input-group">
+                <span class="input-group-text text-light" style="background-color: #000033">Coins</span>
+                <%= text_field_tag :coins, @user.coins, class: "form-control", readonly: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resource :profile
       resources :addresses
       resources :lotteries
+      resources :share_feedbacks, path: 'share', only: [:index,:show]
       resources :offers, path: 'shop', only: :index do
         post :order
       end
@@ -22,7 +23,11 @@ Rails.application.routes.draw do
     namespace :admins, path: '' do
       root to: 'home#index', as: :admin_root
       devise_for :users, controllers: { sessions: 'admins/sessions' }
-      resources :users
+      resources :users do
+        resources :increases, path: 'orders/increase', only: [:create, :new]
+        resources :deductions, path: 'orders/deduct', only: [:create, :new]
+        resources :bonuses, path: 'orders/bonus', only: [:create, :new]
+      end
       resources :items do
         put :start, :pause, :cancel, :end
       end

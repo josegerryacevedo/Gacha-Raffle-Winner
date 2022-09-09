@@ -14,6 +14,7 @@
         <th scope="col">Total Used Coins</th>
         <th scope="col">Children Members</th>
         <th scope="col">Phone Number</th>
+        <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
@@ -27,6 +28,7 @@
           <td></td>
           <td><%= user.children_members %></td>
           <td><%= user.phone %></td>
+          <td><%= link_to "Balance Operate", new_admins_user_increase_path(user), class: 'btn btn-sm btn-danger' %></td>
         </tr>
       <% end %>
       </tbody>
