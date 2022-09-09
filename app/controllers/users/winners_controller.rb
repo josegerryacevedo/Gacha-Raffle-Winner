@@ -8,8 +8,8 @@ class Users::WinnersController < ApplicationController
   def update
     if @winner.claim!
       if @winner.update(address: @address)
-        flash[:notice] = "Successfully Updated!"
-        redirect_to users_profile_path
+        flash[:notice] = "Successfully Claimed!"
+        redirect_to users_profile_path(history: 'winner')
       else
         render :edit
       end
@@ -21,7 +21,7 @@ class Users::WinnersController < ApplicationController
   private
 
   def set_winner
-    @winner = Winner.where(user: current_user).find(params[:id])
+    @winner = Winner.where(user: current_user).won.find(params[:id])
   end
 
   def set_address

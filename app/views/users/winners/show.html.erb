@@ -1,7 +1,7 @@
 <!--Show Page-->
 <div class="container" style="margin-top: 100px; height: 100vh">
   <div class="card border-0">
-    <h5 class="card-header text-light text-center" style="background-color: #000033">Claim Prize</h5>
+    <h5 class="card-header text-light" style="background-color: #000033">Claim Prize</h5>
     <div class="card-body m-3">
       <h3>Winning Bet</h3>
       <div>Serial Number: <%= @winner.bet.serial_number %></div>
@@ -11,30 +11,33 @@
         <%= form_for @winner, url: users_winner_path(@winner), method: :patch do |f| %>
           <b>Select Address:</b>
           <% current_user.addresses.each do |address| %>
-            <div class="row mt-2">
-              <div class="col d-flex ms-2" style="max-width: 40px">
-                <%= f.radio_button :address, address.id, checked: address.is_default %>
-              </div>
-              <div class="col">
-                <span class="badge rounded-pill text-light mb-1" style="background-color: #000033"> <%= address.genre %></span>
-                <span class="badge rounded-pill text-light mb-1" style="background-color: #000033"><%= :Default if address.is_default %></span>
-                <div>
-                  <div class="fw-bold d-inline" style="display:inline">Name:</div>
-                  <%= address.name %>
-                </div>
-                <div>
-                  <div class="fw-bold d-inline" style="display:inline">Address:</div>
-                  <%= "#{address.street_address}, #{address.barangay.name}, #{address.city.name}, #{address.province.name}, #{address.region.region_name}" %>
-                </div>
-                <div>
-                  <div class="fw-bold d-inline" style="display:inline">Phone number:</div>
-                  <%= address.phone_number %>
+            <div class="card mt-1">
+              <div class="card-body">
+                <div class="row mt-2">
+                  <div class="col d-flex ms-2" style="max-width: 40px">
+                    <%= f.radio_button :address, address.id, checked: address.is_default %>
+                  </div>
+                  <div class="col">
+                    <span class="badge rounded-pill text-light mb-1" style="background-color: #000033"> <%= address.genre %></span>
+                    <span class="badge rounded-pill text-light mb-1" style="background-color: #000033"><%= :Default if address.is_default %></span>
+                    <div>
+                      <div class="fw-bold d-inline" style="display:inline">Name:</div>
+                      <%= address.name %>
+                    </div>
+                    <div>
+                      <div class="fw-bold d-inline" style="display:inline">Address:</div>
+                      <%= "#{address.street_address}, #{address.barangay.name}, #{address.city.name}, #{address.province.name}, #{address.region.region_name}" %>
+                    </div>
+                    <div>
+                      <div class="fw-bold d-inline" style="display:inline">Phone number:</div>
+                      <%= address.phone_number %>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <hr class="text-info">
           <% end %>
-          <div class="row">
+          <div class="row mt-1">
             <div class="col-sm-2">
               <%= f.submit "Update", class: 'border btn form-control text-light', style: 'background-color: #000033' %>
             </div>

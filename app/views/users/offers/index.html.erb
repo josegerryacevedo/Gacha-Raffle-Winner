@@ -51,7 +51,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg text-center">
               <div class="modal-content">
                 <div class="modal-body">
-                  Do you want to pay ₱<%= offer.amount %> and get <%= offer.coin %>coins?
+                  Do you want to pay <span class="text-danger">₱<%= offer.amount %></span> and get <span class="text-danger"><%= offer.coin %>coins</span>?
                 </div>
                 <div class="modal-footer">
                   <%= link_to "Order Now!", users_offer_order_path(offer), class: 'btn btn-outline-info btn-sm', method: :post %>

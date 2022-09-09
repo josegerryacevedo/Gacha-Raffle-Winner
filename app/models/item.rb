@@ -71,7 +71,7 @@ class Item < ApplicationRecord
     winner = bet_item.sample
     winner.win!
     bet_item.where.not(state: :won).each { |bet| bet.lose! }
-    store_winner = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
+    store_winner = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner)
     store_winner.save!
   end
 end

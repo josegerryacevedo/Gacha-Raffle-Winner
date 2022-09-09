@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_01_062148) do
+ActiveRecord::Schema.define(version: 2022_09_08_085357) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2022_09_01_062148) do
     t.string "serial_number"
     t.string "state"
     t.integer "coin"
-    t.decimal "amount", precision: 10
+    t.decimal "amount", precision: 10, default: "0"
     t.string "remarks"
     t.integer "genre"
     t.datetime "created_at", precision: 6, null: false
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2022_09_01_062148) do
     t.string "username"
     t.string "role", default: "client"
     t.string "phone"
-    t.integer "coins"
+    t.integer "coins", default: 0
     t.integer "total_deposit"
     t.integer "children_members"
     t.string "reset_password_token"

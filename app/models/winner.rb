@@ -2,6 +2,7 @@ class Winner < ApplicationRecord
   belongs_to :user
   belongs_to :item
   belongs_to :bet
+  validates :picture, :comment, presence: true, if: :shared?
   belongs_to :address, optional: true
   belongs_to :admin, class_name: "User", optional: true
   mount_uploader :picture, ImageUploader
