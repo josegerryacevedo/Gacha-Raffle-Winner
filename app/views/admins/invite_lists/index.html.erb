@@ -1,0 +1,48 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Invite List</h1>
+  </div>
+  <%= form_tag({ url: admins_invite_lists_path }, { method: :get }) do %>
+    <div class="d-inline-block mt-3" style="float: right">
+      <div class="d-inline-block">
+        <div class="input-group">
+          <%= text_field_tag :parent_email, params[:parent_email], class: "form-control", placeholder: 'Parent Email' %>
+          <%= submit_tag :Search, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Reset', admins_invite_lists_path, class: 'btn btn-danger mt-3 btn-sm' %>
+  <% end %>
+  <table class="table text-center table-bordered ">
+    <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+    <tr>
+      <th scope="col">Parent Email</th>
+      <th scope="col">Email</th>
+      <th scope="col">Total Deposit</th>
+      <th scope="col">Member Total Deposits</th>
+      <th scope="col">Coins</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Coins Used Count</th>
+      <th scope="col">Children Members</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.parent&.email %></td>
+        <td><%= user.email %></td>
+        <td><%= user.total_deposit %></td>
+        <td><%= user.children.map(&:total_deposit).sum %></td>
+        <td><%= user.coins %></td>
+        <td><%= user.created_at %></td>
+        <td><%= user.bets.where.not(state: :cancelled).count %></td>
+        <td><%= user.children_members %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% if @users.blank? %>
+    <h2 class="text-center text-danger">NO INVITE TO SHOW</h2>
+  <% end %>
+</div>
+</div>

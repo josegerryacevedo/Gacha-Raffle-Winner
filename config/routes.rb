@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resource :profile
       resources :addresses
       resources :lotteries
-      resources :share_feedbacks, path: 'share', only: [:index,:show]
+      resources :share_feedbacks, path: 'share', only: [:index, :show]
       resources :offers, path: 'shop', only: :index do
         post :order
       end
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       resources :orders, only: :index do
         put :pay, :cancel
       end
+      resources :invite_lists, only: :index
     end
   end
 end
