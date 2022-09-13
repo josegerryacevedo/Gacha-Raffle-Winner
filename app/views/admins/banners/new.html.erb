@@ -1,0 +1,31 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Create Items</h1>
+  </div>
+  <div class="container mt-3">
+    <%= form_for @banner, url: admins_banners_path(@banner), method: :post do |f| %>
+      <div class="field">
+        <%= f.label :preview %>
+        <%= f.file_field :preview, class: 'form-control' %>
+        <%= content_tag :p, @banner.errors.full_messages_for(:preview).join(', '), class: 'text-danger' if @banner.errors.has_key?(:preview) %>
+      </div>
+      <div class="field">
+        <%= f.label :online_at %>
+        <%= f.datetime_field :online_at, class: 'form-control' %>
+        <%= content_tag :p, @banner.errors.full_messages_for(:online_at).join(', '), class: 'text-danger' if @banner.errors.has_key?(:online_at) %>
+      </div>
+      <div class="field">
+        <%= f.label :offline_at %>
+        <%= f.datetime_field :offline_at, class: 'form-control' %>
+        <%= content_tag :p, @banner.errors.full_messages_for(:offline_at).join(', '), class: 'text-danger' if @banner.errors.has_key?(:offline_at) %>
+      </div>
+      <div class="field">
+        <%= f.label :status, 'Status' %>
+        <%= f.select(:status, Banner.statuses.keys.map { |key| [key.humanize, key] }, { :prompt => 'Choose Status' }, class: 'form-control') %>
+        <%= content_tag :p, @banner.errors.full_messages_for(:status).join(', '), class: 'text-danger' if @banner.errors.has_key?(:status) %>
+      </div>
+      <%= f.submit "Submit", class: 'border btn btn-primary mt-1' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_banners_path, class: 'btn text-light', style: 'background-color: #000033' %>
+</div>

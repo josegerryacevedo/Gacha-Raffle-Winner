@@ -1,0 +1,27 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Edit Banner</h1>
+  </div>
+  <div class="container mt-3">
+    <%= form_for @banner, url: admins_banner_path(@banner), method: :patch do |f| %>
+      <div class="field">
+        <%= f.label :preview %>
+        <%= f.file_field :preview, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :online_at %>
+        <%= f.datetime_field :online_at, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :offline_at %>
+        <%= f.datetime_field :offline_at, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :status, 'Status' %>
+        <%= f.select(:status, Banner.statuses.keys.map { |key| [key.humanize, key] }, { :prompt => 'Status' }, class: 'form-control') %>
+      </div>
+      <%= f.submit "Update", class: 'border btn btn-primary mt-1' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_banners_path, class: 'btn text-light', style: 'background-color: #000033' %>
+</div>

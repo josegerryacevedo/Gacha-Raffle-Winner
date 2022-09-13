@@ -1,0 +1,38 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center">Banner List</h1>
+  </div>
+  <div>
+    <br/>
+    <%= render 'layouts/errors_message' %>
+    <table class="table text-center table-bordered ">
+      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+      <tr>
+        <th scope="col">Preview</th>
+        <th scope="col">Online At</th>
+        <th scope="col">Offline At</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @banners&.each do |banner| %>
+        <tr>
+          <td><%= image_tag banner.preview.url, style: 'height:50px; width:100px' if banner.preview.present? %></td>
+          <td><%= banner.online_at %></td>
+          <td><%= banner.offline_at %></td>
+          <td><%= banner.status %></td>
+          <td>
+            <%= link_to 'Edit', edit_admins_banner_path(banner), class: 'btn btn-primary btn-sm mt-1' %>
+            <%= link_to 'Delete', admins_banner_path(banner), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm mt-1' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% if @banners.blank? %>
+      <h2 class="text-center text-danger">No Banners to show</h2>
+    <% end %>
+    <%= link_to 'Add Banner', new_admins_banner_path, class: 'btn text-light', style: 'background-color: #000033' %>
+  </div>
+</div>
