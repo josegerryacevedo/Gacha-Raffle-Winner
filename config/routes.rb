@@ -43,6 +43,7 @@ Rails.application.routes.draw do
         put :pay, :cancel
       end
       resources :invite_lists, only: :index
+      resources :news_tickers
     end
   end
 end

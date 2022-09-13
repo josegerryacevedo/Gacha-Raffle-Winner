@@ -1,0 +1,34 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center">NewsTicker List</h1>
+  </div>
+  <div>
+    <br/>
+    <%= render 'layouts/errors_message' %>
+    <table class="table text-center table-bordered ">
+      <thead class="thead text-light bg-dark" style="font-family: 'Comic Sans MS'">
+      <tr>
+        <th scope="col">Content</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @news_tickers.each do |news_ticker| %>
+        <tr>
+          <td><%= news_ticker.content %></td>
+          <td><%= news_ticker.status %></td>
+          <td>
+            <%= link_to 'Edit', edit_admins_news_ticker_path(news_ticker), class: 'btn btn-primary btn-sm mt-1' %>
+            <%= link_to 'Delete', admins_news_ticker_path(news_ticker), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm mt-1' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% if @news_tickers.blank? %>
+      <h2 class="text-center text-danger">No NewsTicker to show</h2>
+    <% end %>
+    <%= link_to 'Add', new_admins_news_ticker_path, class: 'btn text-light', style: 'background-color: #000033' %>
+  </div>
+</div>

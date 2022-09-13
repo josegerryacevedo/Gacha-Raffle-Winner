@@ -1,0 +1,22 @@
+<div class="col py-3">
+  <div class="card" style="background-color: #000033">
+    <h1 style="font-family: Courier" class="text-light text-center"> Edit List</h1>
+  </div>
+  <br>
+  <div class="container">
+    <%= form_for @news_ticker, url: admins_news_ticker_path(@news_ticker), method: :patch do |f| %>
+      <div class="field">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control' %>
+        <%= content_tag :p, @news_ticker.errors.full_messages_for(:content).join(', '), class: 'text-danger' if @news_ticker.errors.has_key?(:content) %>
+      </div>
+      <div class="field">
+        <%= f.label :status, 'Status' %>
+        <%= f.select(:status, NewsTicker.statuses.keys.map { |key| [key.humanize, key] }, { :prompt => 'Choose Status' }, class: 'form-control') %>
+        <%= content_tag :p, @news_ticker.errors.full_messages_for(:status).join(', '), class: 'text-danger' if @news_ticker.errors.has_key?(:status) %>
+      </div>
+      <%= f.submit "Update", class: 'border btn btn-primary mt-1' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', admins_news_tickers_path, class: 'btn text-light', style: 'background-color: #000033' %>
+</div>
