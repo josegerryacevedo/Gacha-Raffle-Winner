@@ -1,26 +1,50 @@
 <nav class="navbar navbar-light fixed-top" style="background-color: #000033">
-  <div class="container-fluid">
+  <div class="container">
     <%= link_to client_root_path, class: 'navbar-brand text-light' do %>
       <img alt="logo" src="/rem.png">
     <% end %>
     <ul class="nav">
+      <% if !current_user %>
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class: 'btn btn-light nav-link text-dark font-weight-bold', style: 'font-size: 9px' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Signup", new_user_registration_path, class: 'btn btn-light nav-link text-dark font-weight-bold', style: 'font-size: 9px; margin-left: 5px; margin-right: -10px' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link text-warning">
+            <div class="d-inline-block"><%= current_user&.coins %></div>
+            <i class="fa-sharp fa-solid fa-coins"></i>
+          </a>
+        </li>
+      <% end %>
       <li class="nav-item">
-        <%= link_to "Log in", new_user_session_path, class: 'nav-link' if current_user.blank? %>
+        <a class="nav-link fa-sharp fa-solid fa-globe fa-xl text-light mt-2" style="margin-right: -20px" data-bs-toggle="offcanvas" href="#offcanvasExample1" aria-controls="offcanvasExample"></a>
       </li>
+      <div class="offcanvas offcanvas-start text-white" style="padding-top: 30px; background-color: #000033" tabindex="-1" id="offcanvasExample1" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header justify-content-end">
+          <a type="button" class="fa-solid fa-x bg-transparent text-light" data-bs-dismiss="offcanvas" aria-label="Close" style="text-decoration: none"></a>
+        </div>
+        <div class="offcanvas-body text-decoration-none">
+          <ul class="navbar-nav flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">TAGALOG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">ENGLISH</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <li class="nav-item">
-        <%= link_to "Sign up", new_user_registration_path, class: 'nav-link' if current_user.blank? %>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Language</a>
-      </li>
-      <li class="nav-item">
-        <button class="navbar-toggler text-bg-light border-0" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="nav-link fa-sharp fa-solid fa-bars fa-2xl text-light mt-2" style="margin-right: -10px" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample"></a>
       </li>
     </ul>
-
     <div class="offcanvas offcanvas-start text-white" style="padding-top: 30px; background-color: #000033" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header justify-content-end">
+        <a type="button" class="fa-solid fa-x bg-transparent text-light" data-bs-dismiss="offcanvas" aria-label="Close" style="text-decoration: none"></a>
+      </div>
       <div class="offcanvas-body text-decoration-none">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <% if current_user %>

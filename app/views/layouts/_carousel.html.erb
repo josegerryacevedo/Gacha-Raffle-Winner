@@ -1,0 +1,89 @@
+<style>
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .marquee {
+        padding-left: 100%;
+        display: inline-block;
+        animation: marquee 13s linear infinite;
+        animation-play-state: running;
+        font-size: 20px;
+    }
+
+    .marquee.paused, .marquee-container:hover .marquee {
+        animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .carousel-item img {
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+</style>
+
+<div class="container pt-2">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner" style="max-height: 45vh; height: 50vw; background-color: black">
+      <% set_banners.each_with_index do |banner, index| %>
+        <div class="carousel-item <%= 'active' if index == 0 %>">
+          <%= image_tag banner.preview.url, alt: 'image', class: "d-flex w-100" if banner.preview? %>
+        </div>
+      <% end %>
+    </div>
+    <button class="carousel-control-prev mt-4" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next mt-4" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<section class=" text-light" style="height: 4vh;background-color: #000033">
+  <div class="container">
+    <div class="ticker">
+      <div class="title"></div>
+      <div class="news">
+        <div class="slider">
+          <div class="marquee-container">
+            <div class="marquee paused">
+              <% set_news_tickers.each do |news_ticker| %>
+                <span><%= news_ticker.content %></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        let key = 0;
+        const marquee = $('.marquee');
+        $('.marquee span').hide()
+        $(".marquee").children().eq(key).show()
+
+        marquee.on('animationiteration', () => {
+            key++;
+            if (($(".marquee").children().length) == key) key = 0;
+            $('.marquee span').hide()
+            $(".marquee").children().eq(key).show();
+        });
+
+        marquee.removeClass('paused');
+    })
+</script>
