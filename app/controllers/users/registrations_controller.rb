@@ -45,7 +45,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       render :edit
     end
-
   end
 
   def update_user

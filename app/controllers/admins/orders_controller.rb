@@ -16,7 +16,7 @@ class Admins::OrdersController < AdminController
   end
 
   def pay
-    if @order.may_pay?
+    if @order.may_pay? && @order.pay!
       flash[:notice] = "Successfully Paid!"
     else
       flash[:alert] = @order.errors.full_messages.join(', ')
@@ -25,7 +25,7 @@ class Admins::OrdersController < AdminController
   end
 
   def cancel
-    if @order.may_cancel?
+    if @order.may_cancel? && @order.cancel!
       flash[:notice] = "Successfully Cancelled!"
     else
       flash[:alert] = @order.errors.full_messages.join(', ')

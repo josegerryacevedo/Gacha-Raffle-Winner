@@ -15,23 +15,29 @@ class Users::LotteriesController < ApplicationController
   end
 
   def create
-    begin
-      count = params[:bet][:coins].to_i
-      params[:bet][:coins] = 1
-      params[:bet][:item_id] = @item.id
-      ActiveRecord::Base.transaction do
-        count.times do
-          @bet = Bet.new(bet_params)
-          @bet.user = current_user
-          @bet.batch_count = @item.batch_count
-          @bet.save!
+    @bet_coin = params[:bet][:coins].to_i
+    if current_user.coins >= @bet_coin
+      begin
+        count = params[:bet][:coins].to_i
+        params[:bet][:coins] = 1
+        params[:bet][:item_id] = @item.id
+        ActiveRecord::Base.transaction do
+          count.times do
+            @bet = Bet.new(bet_params)
+            @bet.user = current_user
+            @bet.batch_count = @item.batch_count
+            @bet.save!
+          end
         end
+        flash[:notice] = "Successfully Bet!"
+      rescue ActiveRecord::RecordInvalid => exception
+        flash[:alert] = exception
       end
-      flash[:notice] = "Successfully Bet!"
-    rescue ActiveRecord::RecordInvalid => exception
-      flash[:alert] = exception
+      redirect_to users_lottery_path (@item)
+    else
+      flash[:alert] = "You have only #{current_user.coins} coins!"
+      redirect_to users_lottery_path (@item)
     end
-    redirect_to users_lottery_path (@item)
   end
 
   private

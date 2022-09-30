@@ -14,9 +14,9 @@ class Order < ApplicationRecord
       transitions from: :pending, to: :submitted
     end
 
-    event :pay do
+    event :pay, after: :pay_change_user_coins do
       transitions from: :submitted, to: :paid, after: :increase_total_deposit
-      transitions from: :pending, to: :paid, guard: :on_cancel_check_user_coin, after: :pay_change_user_coins
+      transitions from: :pending, to: :paid, guard: :on_cancel_check_user_coin?
     end
 
     event :cancel do
@@ -54,7 +54,7 @@ class Order < ApplicationRecord
     user_coins
   end
 
-  def on_cancel_check_user_coin
+  def on_cancel_check_user_coin?
     return true if !deduct?
     user_coins
   end

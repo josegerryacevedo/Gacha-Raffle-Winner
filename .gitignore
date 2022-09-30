@@ -32,7 +32,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/public
 /public/packs
+/public/uploads
 /public/uploads/tmp
 /public/uploads/user
 /public/packs-test
