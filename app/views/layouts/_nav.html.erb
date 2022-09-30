@@ -29,10 +29,10 @@
         <div class="offcanvas-body text-decoration-none">
           <ul class="navbar-nav flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link text-light" href="#">TAGALOG</a>
+              <%= link_to "English", { :locale => 'en' }, class: 'text-decoration-none' %>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">ENGLISH</a>
+            <li class="nav-item mt-3">
+              <%= link_to "Tagalog", { :locale => 'tl' }, class: 'text-decoration-none' %>
             </li>
           </ul>
         </div>
@@ -90,18 +90,18 @@
 <!--Footer-->
 <ul class="nav bg-light justify-content-center fixed-bottom">
   <li class="nav-item">
-    <%= link_to "Share", users_share_feedbacks_path, class: 'nav-link', style: 'color: #000033' %>
+    <%= link_to t("share"), users_share_feedbacks_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <%= link_to "Invite", users_invite_people_path, class: 'nav-link', style: 'color: #000033' %>
+    <%= link_to t("invite"), users_invite_people_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <%= link_to "Lottery", users_lotteries_path, class: 'nav-link', style: 'color: #000033' %>
+    <%= link_to t("lottery"), users_lotteries_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <%= link_to "Shop", users_offers_path, class: 'nav-link', style: 'color: #000033' %>
+    <%= link_to t("shop"), users_offers_path, class: 'nav-link', style: 'color: #000033' %>
   </li>
   <li class="nav-item">
-    <%= link_to "Me", users_profile_path, class: 'nav-link', style: 'color: #000033' if current_user %>
+    <%= link_to t("me"), users_profile_path, class: 'nav-link', style: 'color: #000033' if current_user %>
   </li>
 </ul>
